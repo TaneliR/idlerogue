@@ -1,0 +1,10 @@
+[gd_resource type="SpatialMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Assets/texture.png" type="Texture" id=1]
+[ext_resource path="res://Assets/texturemr.png" type="Texture" id=2]
+
+[resource]
+albedo_texture = ExtResource( 1 )
+metallic = 0.51
+metallic_texture = ExtResource( 2 )
+roughness_texture = ExtResource( 2 )

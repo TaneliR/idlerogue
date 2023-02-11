@@ -1,0 +1,229 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://Assets/ratte.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Assets/barHorizontal_green_mid 200.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Healthbar3D.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Healthbar2D.gd" type="Script" id=5]
+
+[sub_resource type="BoxShape" id=17]
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 23
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 23
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 23
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 23
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 23
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 23
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 23
+atlas = ExtResource( 1 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=35]
+flags = 23
+atlas = ExtResource( 1 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=36]
+animations = [ {
+"frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"loop": true,
+"name": "default",
+"speed": 6.0
+} ]
+
+[sub_resource type="Gradient" id=25]
+
+[sub_resource type="GradientTexture2D" id=26]
+flags = 32
+gradient = SubResource( 25 )
+width = 32
+height = 32
+use_hdr = true
+fill = 1
+fill_from = Vector2( 0.564815, 0.524306 )
+fill_to = Vector2( 2, 2 )
+
+[sub_resource type="SpatialMaterial" id=27]
+flags_transparent = true
+flags_albedo_tex_force_srgb = true
+flags_ensure_correct_normals = true
+params_diffuse_mode = 2
+params_specular_mode = 1
+params_cull_mode = 2
+params_depth_draw_mode = 2
+params_point_size = 0.1
+albedo_color = Color( 0, 0.305882, 1, 0.172549 )
+clearcoat_enabled = true
+clearcoat = 1.0
+clearcoat_gloss = 0.5
+detail_enabled = true
+detail_blend_mode = 1
+detail_uv_layer = 0
+detail_albedo = SubResource( 26 )
+
+[sub_resource type="ShaderMaterial" id=22]
+
+[sub_resource type="CubeMesh" id=23]
+material = SubResource( 22 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="Curve" id=37]
+max_value = 0.5
+_data = [ Vector2( 0, 2.72726 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=38]
+curve = SubResource( 37 )
+
+[sub_resource type="ParticlesMaterial" id=39]
+lifetime_randomness = 0.37
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 2.0
+initial_velocity = 0.1
+radial_accel = 0.4
+radial_accel_random = 0.2
+tangential_accel = 0.2
+damping = 0.5
+angle = 12.3
+angle_random = 0.95
+scale_random = 0.63
+color = Color( 0.811765, 0.00392157, 0.00392157, 1 )
+
+[sub_resource type="Curve" id=40]
+max_value = 4.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.53182 ), 4.38287, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=41]
+curve = SubResource( 40 )
+
+[sub_resource type="Gradient" id=42]
+colors = PoolColorArray( 0.65332, 0, 0, 1, 0.192383, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=43]
+gradient = SubResource( 42 )
+
+[sub_resource type="Curve" id=44]
+min_value = 0.25
+_data = [ Vector2( 0, 0.255966 ), 0.0, 7.30143, 0, 0, Vector2( 1, 0.25 ), 0.526419, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=45]
+width = 64
+curve = SubResource( 44 )
+
+[sub_resource type="ParticlesMaterial" id=46]
+next_pass = SubResource( 39 )
+lifetime_randomness = 0.12
+trail_divisor = 2
+trail_size_modifier = SubResource( 45 )
+trail_color_modifier = SubResource( 43 )
+emission_shape = 1
+emission_sphere_radius = 0.04
+direction = Vector3( 0, 4, 0 )
+spread = 0.25
+flatness = 0.03
+gravity = Vector3( 0, -4, 0 )
+initial_velocity = 0.7
+initial_velocity_random = 0.02
+linear_accel = 0.4
+linear_accel_random = 0.02
+linear_accel_curve = SubResource( 38 )
+radial_accel = 1.0
+damping = 0.01
+damping_random = 0.02
+scale = 3.0
+scale_random = 0.45
+scale_curve = SubResource( 41 )
+color = Color( 0.619608, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=47]
+albedo_color = Color( 0.87451, 0, 0, 1 )
+metallic = 0.28
+metallic_specular = 0.12
+
+[sub_resource type="SphereMesh" id=48]
+material = SubResource( 47 )
+radius = 0.02
+height = 0.1
+radial_segments = 15
+rings = 5
+
+[node name="Enemy" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0 )
+shape = SubResource( 17 )
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.5, 0 )
+billboard = 1
+frames = SubResource( 36 )
+frame = 1
+playing = true
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.001, 0 )
+visible = false
+material_override = SubResource( 27 )
+cast_shadow = 0
+generate_lightmap = false
+mesh = SubResource( 23 )
+
+[node name="Blood" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.804227, 0 )
+emitting = false
+amount = 16
+lifetime = 1.2
+one_shot = true
+speed_scale = 1.4
+explosiveness = 0.01
+randomness = 0.02
+fract_delta = false
+visibility_aabb = AABB( -6.181, -4, -4, 8, 8, 8 )
+process_material = SubResource( 46 )
+draw_pass_1 = SubResource( 48 )
+
+[node name="Healthbar3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.298914, 0 )
+pixel_size = 0.005
+billboard = 1
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="Viewport" type="Viewport" parent="Healthbar3D"]
+size = Vector2( 200, 26 )
+transparent_bg = true
+hdr = false
+usage = 0
+render_target_v_flip = true
+
+[node name="Healthbar2D" type="TextureProgress" parent="Healthbar3D/Viewport"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )

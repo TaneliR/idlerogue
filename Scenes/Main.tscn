@@ -1,0 +1,188 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Assets/menuseikkailu_loop.tres" type="AudioStream" id=1]
+[ext_resource path="res://Scripts/MoneyCounter.gd" type="Script" id=2]
+[ext_resource path="res://ownmeshlib.tres" type="MeshLibrary" id=3]
+[ext_resource path="res://skyyyy.tres" type="Environment" id=4]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Coins.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Food.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Potion.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/UI.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/MoneyCounter.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scripts/PickupZone.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=14]
+[ext_resource path="res://Assets/character.png" type="Texture" id=15]
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 23
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 23
+atlas = ExtResource( 15 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 23
+atlas = ExtResource( 15 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 23
+atlas = ExtResource( 15 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 23
+atlas = ExtResource( 15 )
+region = Rect2( 0, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 23
+atlas = ExtResource( 15 )
+region = Rect2( 16, 32, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=16]
+animations = [ {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Gradient" id=25]
+
+[sub_resource type="GradientTexture2D" id=26]
+flags = 32
+gradient = SubResource( 25 )
+width = 32
+height = 32
+use_hdr = true
+fill = 1
+fill_from = Vector2( 0.564815, 0.524306 )
+fill_to = Vector2( 2, 2 )
+
+[sub_resource type="SpatialMaterial" id=27]
+flags_transparent = true
+flags_albedo_tex_force_srgb = true
+flags_ensure_correct_normals = true
+params_diffuse_mode = 2
+params_specular_mode = 1
+params_cull_mode = 2
+params_depth_draw_mode = 2
+params_point_size = 0.1
+albedo_color = Color( 0, 0.305882, 1, 0.172549 )
+clearcoat_enabled = true
+clearcoat = 1.0
+clearcoat_gloss = 0.5
+detail_enabled = true
+detail_blend_mode = 1
+detail_uv_layer = 0
+detail_albedo = SubResource( 26 )
+
+[sub_resource type="ShaderMaterial" id=22]
+
+[sub_resource type="CubeMesh" id=23]
+material = SubResource( 22 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=17]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.707107, -0.40558, 0.579228, 0, 0.819152, 0.573576, -0.707107, -0.40558, 0.579228, 15, 12, 9 )
+environment = ExtResource( 4 )
+current = true
+fov = 55.0
+size = 16.0
+script = ExtResource( 5 )
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 3 )
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+data = {
+"cells": PoolIntArray( 0, 0, 393217, 1, 0, 1441792, 2, 0, 0, 3, 0, 1245185, 4, 0, 1441792, 5, 0, 1441792, 6, 0, 1441792, 7, 0, 720897, 65532, 0, 786433, 65533, 0, 786433, 65534, 0, 786433, 65535, 0, 393217, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 1114113, 4, 1, 786433, 5, 1, 786433, 6, 1, 786433, 65534, 1, 1376257, 65535, 1, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 1114113, 65534, 2, 1376257, 65535, 2, 0, 0, 3, 786433, 1, 3, 786433, 2, 3, 786433, 65535, 3, 786433, 0, 65530, 262145, 1, 65530, 262145, 2, 65530, 262145, 3, 65530, 262145, 4, 65530, 262145, 65534, 65530, 262145, 65535, 65530, 262145, 0, 65531, 1441792, 1, 65531, 1441792, 2, 65531, 1441792, 3, 65531, 1441792, 4, 65531, 1441792, 5, 65531, 720897, 65533, 65531, 1245185, 65534, 65531, 1441792, 65535, 65531, 1441792, 0, 65532, 786433, 1, 65532, 786433, 2, 65532, 786433, 3, 65532, 786433, 4, 65532, 1441792, 5, 65532, 720897, 65532, 65532, 458753, 65533, 65532, 458753, 65534, 65532, 1441792, 65535, 65532, 786433, 0, 65533, 720897, 1, 65533, 262145, 2, 65533, 262145, 3, 65533, 393217, 4, 65533, 1441792, 5, 65533, 720897, 65531, 65533, 1245185, 65532, 65533, 1441792, 65533, 65533, 1441792, 65534, 65533, 1441792, 65535, 65533, 1441792, 0, 65534, 1114113, 1, 65534, 1441792, 2, 65534, 1441792, 3, 65534, 1441792, 4, 65534, 1441792, 5, 65534, 262145, 6, 65534, 262145, 65531, 65534, 1245185, 65532, 65534, 1441792, 65533, 65534, 1441792, 65534, 65534, 1441792, 65535, 65534, 1441792, 0, 65535, 1245185, 1, 65535, 1441792, 2, 65535, 1114113, 3, 65535, 786433, 4, 65535, 1441792, 5, 65535, 1441792, 6, 65535, 1441792, 7, 65535, 720897, 65531, 65535, 1245185, 65532, 65535, 1441792, 65533, 65535, 1441792, 65534, 65535, 1441792, 65535, 65535, 851969 )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.961109, 4.90835, -1.48831 )
+stream = ExtResource( 1 )
+unit_size = 7.7
+
+[node name="Enemy" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.98476, 0, 0 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04245, 0, -4.08815 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.87581, 0.0487654, 0 )
+
+[node name="Coins" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -1, -2 )
+
+[node name="Coins2" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 4 )
+
+[node name="Potion" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, -10 )
+
+[node name="Food" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, -6 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 11 )
+
+[node name="Inventory" parent="UI" instance=ExtResource( 10 )]
+visible = false
+
+[node name="MoneyCounter" parent="UI" instance=ExtResource( 12 )]
+script = ExtResource( 2 )
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 4 )
+collision_mask = 0
+axis_lock_motion_y = true
+move_lock_y = true
+script = ExtResource( 14 )
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
+transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.5, 0 )
+billboard = 1
+frames = SubResource( 16 )
+frame = 3
+playing = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Player"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.1, 0 )
+material_override = SubResource( 27 )
+cast_shadow = 0
+generate_lightmap = false
+mesh = SubResource( 23 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0 )
+shape = SubResource( 17 )
+
+[node name="PickupZone" type="Area" parent="Player"]
+collision_layer = 0
+collision_mask = 4096
+script = ExtResource( 13 )
+
+[node name="PickupShape" type="CollisionShape" parent="Player/PickupZone"]
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0 )
+shape = SubResource( 17 )
+
+[connection signal="money_changed" from="Player" to="UI/MoneyCounter" method="_on_Player_money_changed"]
+[connection signal="body_entered" from="Player/PickupZone" to="Player/PickupZone" method="_on_PickupZone_body_entered"]
+[connection signal="body_exited" from="Player/PickupZone" to="Player/PickupZone" method="_on_PickupZone_body_exited"]

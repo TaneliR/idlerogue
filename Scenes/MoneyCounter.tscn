@@ -1,0 +1,16 @@
+[gd_scene format=2]
+
+[node name="MoneyCounter" type="Node2D"]
+
+[node name="DollarSign" type="Label" parent="."]
+margin_left = 937.0
+margin_top = 4.0
+margin_right = 949.0
+margin_bottom = 18.0
+text = "$"
+
+[node name="Money" type="Label" parent="."]
+margin_left = 947.0
+margin_top = 3.0
+margin_right = 1021.0
+margin_bottom = 17.0
