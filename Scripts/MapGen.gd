@@ -4,10 +4,10 @@ enum TILE_TYPES {FLOOR, WALL}
 
 var noise := OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
-var allowed_spawn_points = [PoolVector3Array()]
 var player_instance
 var fog_nodes = []
 
+onready var allowed_spawn_points = [PoolVector3Array()]
 onready var map_size = 24
 onready var map_height = 2
 onready var currentSeed
@@ -52,7 +52,7 @@ func populate_map():
 	for _i in range(8):
 		var random_spawn_point = allowed_spawn_points.pop_at(rng.randi_range(0, allowed_spawn_points.size()-1))
 		var enemy_instance = enemy.instance()
-		enemy_instance.transform.origin = random_spawn_point + Vector3(0.5, 1, 0.5)
+		enemy_instance.transform.origin = random_spawn_point as Vector3
 		add_child(enemy_instance)
 
 
@@ -72,7 +72,7 @@ func cleanup_map():
 func spawn_player():
 	var random_spawn_point = allowed_spawn_points.pop_at(rng.randi_range(0, allowed_spawn_points.size()-1))
 	player_instance = player.instance()
-	player_instance.transform.origin = random_spawn_point + Vector3(0.5, 0, 0.5)
+	player_instance.transform.origin = random_spawn_point as Vector3
 	add_child(player_instance)
 	$PlayerCamera.set_target(player_instance.get_node("CameraAnchor"))
 	$PlayerCamera.make_current()

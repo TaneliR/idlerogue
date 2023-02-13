@@ -28,19 +28,19 @@ func _unhandled_input(event):
 
 func move(dir):
 	var nextStep = inputs[dir] * tile_size;
-	get_tree().call_group("enemy", "move")
-	var col = move_and_collide(nextStep, true, true, false);
+	var col = move_and_collide(nextStep);
 	if (col):
 		if (col.collider.is_in_group("enemy")):
 			attack(col.collider)
-	if $PickupZone.items_in_range.size() > 0:
-		var pickup_item = $PickupZone.items_in_range.values()[0]
-		pickup_item.pick_up_item(self)
-		if (pickup_item is coin_type):
-			money = money + pickup_item.amount
-			emit_signal("money_changed", money)
-		$PickupZone.items_in_range.erase(pickup_item)
-	
+		if $PickupZone.items_in_range.size() > 0:
+			var pickup_item = $PickupZone.items_in_range.values()[0]
+			pickup_item.pick_up_item(self)
+			if (pickup_item is coin_type):
+				money = money + pickup_item.amount
+				emit_signal("money_changed", money)
+				$PickupZone.items_in_range.erase(pickup_item)
+	get_tree().call_group("enemy", "move", self)
+					
 func attack(target):
 	var dmg = hit_die[0] * hit_die[1] + attack_power;
 	target.take_damage(dmg);
@@ -49,16 +49,7 @@ func initialize_camera():
 	emit_signal("set_camera_target", self)
 
 func _on_SightArea_body_entered(body:Node):
-	print(body)
 	body.get_parent().change_to_visited()
-	# body.queue_free()
-	# print("DEL", body)
-	# if (body == fog_type):
-	# 	print("DELff")
-	# 	body.get_parent().free()
-
 
 func _on_SightArea_area_entered(area:Area):
-	print(area)
-	print("DELare")
 	area.get_parent().get_parent().free()

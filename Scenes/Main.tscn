@@ -163,7 +163,7 @@ script = ExtResource( 14 )
 transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.5, 0 )
 billboard = 1
 frames = SubResource( 16 )
-frame = 3
+frame = 5
 playing = true
 
 [node name="MeshInstance" type="MeshInstance" parent="Player"]
