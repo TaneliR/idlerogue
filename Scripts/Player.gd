@@ -1,7 +1,7 @@
 extends KinematicBody
 
 var moving = false;
-var tile_size = 2;
+var tile_size = 1;
 var attack_power = 3;
 var hit_die = [3, 6]; # 3d6+3
 var rng = RandomNumberGenerator.new()
@@ -12,11 +12,14 @@ var inputs = {"right": Vector3.RIGHT,
 var inventory = []
 onready var money = 0
 signal money_changed
+signal set_camera_target
 const coin_type = preload("res://Scripts/Coins.gd")
+const fog_type = preload("res://Scenes/FogOfWarMesh.tscn")
 
 func _ready():
+	call_deferred("initialize_camera")
 	rng.randomize()
-	move_and_slide_with_snap(Vector3.ONE * tile_size + Vector3.ONE * tile_size/2, Vector3.ZERO)
+	
 	
 func _unhandled_input(event):
 	for dir in inputs.keys():
@@ -41,4 +44,21 @@ func move(dir):
 func attack(target):
 	var dmg = hit_die[0] * hit_die[1] + attack_power;
 	target.take_damage(dmg);
-	
+
+func initialize_camera():
+	emit_signal("set_camera_target", self)
+
+func _on_SightArea_body_entered(body:Node):
+	print(body)
+	body.get_parent().change_to_visited()
+	# body.queue_free()
+	# print("DEL", body)
+	# if (body == fog_type):
+	# 	print("DELff")
+	# 	body.get_parent().free()
+
+
+func _on_SightArea_area_entered(area:Area):
+	print(area)
+	print("DELare")
+	area.get_parent().get_parent().free()

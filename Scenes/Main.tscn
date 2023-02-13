@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/menuseikkailu_loop.tres" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/MoneyCounter.gd" type="Script" id=2]
@@ -15,34 +15,35 @@
 [ext_resource path="res://Scripts/PickupZone.gd" type="Script" id=13]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=14]
 [ext_resource path="res://Assets/character.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/PlayerCamera.tscn" type="PackedScene" id=16]
 
 [sub_resource type="AtlasTexture" id=10]
-flags = 23
+flags = 2
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=11]
-flags = 23
+flags = 2
 atlas = ExtResource( 15 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=12]
-flags = 23
+flags = 2
 atlas = ExtResource( 15 )
 region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=13]
-flags = 23
+flags = 2
 atlas = ExtResource( 15 )
 region = Rect2( 16, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=14]
-flags = 23
+flags = 2
 atlas = ExtResource( 15 )
 region = Rect2( 0, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=15]
-flags = 23
+flags = 2
 atlas = ExtResource( 15 )
 region = Rect2( 16, 32, 16, 16 )
 
@@ -149,6 +150,8 @@ visible = false
 [node name="MoneyCounter" parent="UI" instance=ExtResource( 12 )]
 script = ExtResource( 2 )
 
+[node name="PlayerCamera" parent="." instance=ExtResource( 16 )]
+
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 4 )
 collision_mask = 0
@@ -184,5 +187,6 @@ transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0 )
 shape = SubResource( 17 )
 
 [connection signal="money_changed" from="Player" to="UI/MoneyCounter" method="_on_Player_money_changed"]
+[connection signal="set_camera_target" from="Player" to="PlayerCamera" method="_on_Player_set_camera_target"]
 [connection signal="body_entered" from="Player/PickupZone" to="Player/PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="Player/PickupZone" to="Player/PickupZone" method="_on_PickupZone_body_exited"]

@@ -5,142 +5,142 @@
 [ext_resource path="res://Scripts/Enemy_death.gd" type="Script" id=3]
 
 [sub_resource type="AtlasTexture" id=37]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=38]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=39]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=40]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=41]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=42]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 16, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=43]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 32, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=44]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 48, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=45]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 0, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=46]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 16, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=47]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 32, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=48]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 48, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=49]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 0, 48, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=50]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 16, 48, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=51]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 32, 48, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=52]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 48, 48, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=53]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 0, 64, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=54]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 16, 64, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=55]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 32, 64, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=56]
-flags = 23
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 48, 64, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=28]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=29]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=30]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=31]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=32]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=33]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 16, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=34]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 32, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=35]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 48, 16, 16, 16 )
 
@@ -168,6 +168,7 @@ transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.5, 0 )
 billboard = 1
 frames = SubResource( 36 )
 animation = "death"
+frame = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 57 )

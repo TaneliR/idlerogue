@@ -2,30 +2,28 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/monees.png-5b75ccfce401c7c8ca1650c37aecfe0c.s3tc.stex"
-path.etc2="res://.import/monees.png-5b75ccfce401c7c8ca1650c37aecfe0c.etc2.stex"
+path="res://.import/monees.png-5b75ccfce401c7c8ca1650c37aecfe0c.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets/monees.png"
-dest_files=[ "res://.import/monees.png-5b75ccfce401c7c8ca1650c37aecfe0c.s3tc.stex", "res://.import/monees.png-5b75ccfce401c7c8ca1650c37aecfe0c.etc2.stex" ]
+dest_files=[ "res://.import/monees.png-5b75ccfce401c7c8ca1650c37aecfe0c.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=true
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=0
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

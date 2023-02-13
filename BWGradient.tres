@@ -1,0 +1,12 @@
+[gd_resource type="GradientTexture2D" load_steps=2 format=2]
+
+[sub_resource type="Gradient" id=12]
+interpolation_mode = 2
+offsets = PoolRealArray( 0.1, 1 )
+
+[resource]
+flags = 36
+gradient = SubResource( 12 )
+use_hdr = true
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )

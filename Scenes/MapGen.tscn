@@ -1,0 +1,389 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Scripts/MapGen.gd" type="Script" id=1]
+[ext_resource path="res://mapgenmeshlibtest.tres" type="MeshLibrary" id=2]
+[ext_resource path="res://Assets/ccbbb.png" type="Texture" id=3]
+[ext_resource path="res://addons/SliderLabel/SliderLabel.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/MapgenPanel.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/MapgenCamera.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/PlayerCamera.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_energy = 3.32
+ambient_light_color = Color( 0.352941, 0.282353, 1, 1 )
+ambient_light_energy = 1.05
+ambient_light_sky_contribution = 0.0
+fog_sun_color = Color( 0.00784314, 1, 0.34902, 1 )
+fog_depth_enabled = false
+tonemap_white = 0.62
+ss_reflections_max_steps = 12
+ss_reflections_roughness = false
+glow_enabled = true
+glow_bloom = 0.27
+adjustment_enabled = true
+adjustment_brightness = 1.38
+adjustment_saturation = 1.64
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.027451, 0, 0.0980392, 0.8, 0.0235294, 0.0235294, 0.0235294, 0.858824 )
+
+[sub_resource type="GradientTexture2D" id=3]
+gradient = SubResource( 2 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0, 0 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = SubResource( 3 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="CanvasItemMaterial" id=11]
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.506494, 1 )
+colors = PoolColorArray( 0.0235294, 0.113725, 0.14902, 0.65098, 0.141176, 0.803922, 0.803922, 0.219608, 0.0235294, 0.113725, 0.14902, 0.698039 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = SubResource( 9 )
+region_rect = Rect2( 0, 0, 2048, 1 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.502164, 1 )
+colors = PoolColorArray( 0.0235294, 0.113725, 0.14902, 0.333333, 0.198669, 0.410156, 0.4052, 1, 0.0235294, 0.113725, 0.14902, 0.529412 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = SubResource( 6 )
+region_rect = Rect2( 0, 0, 2048, 1 )
+
+[node name="MapGen" type="Spatial"]
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 2 )
+cell_size = Vector3( 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 4, 0 )
+}
+
+[node name="PlayerCamera" parent="GridMap" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+current = true
+fov = 65.0
+size = 25.0
+far = 256.0
+script = null
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 128, 128 )
+environment = SubResource( 1 )
+projection = 1
+current = true
+fov = 35.0
+size = 124.188
+far = 1063.5
+script = ExtResource( 6 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.554031, 0.832496, 0, -0.832496, 0.554031, 135.378, 39.9647, 161.626 )
+light_color = Color( 0.105882, 0.027451, 0.027451, 1 )
+light_energy = 5.086
+light_indirect_energy = 3.584
+light_size = 1.0
+light_specular = 15.135
+light_bake_mode = 2
+shadow_enabled = true
+shadow_color = Color( 0.266667, 0.266667, 0.266667, 1 )
+shadow_bias = 0.66
+shadow_reverse_cull_face = true
+spot_range = 624.375
+spot_angle = 33.84
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125, 12, 12 )
+light_color = Color( 0.403922, 0.145098, 0.466667, 1 )
+light_energy = 2.86
+light_indirect_energy = 8.814
+light_size = 0.605
+light_specular = 0.4
+light_bake_mode = 2
+omni_range = 1094.92
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchor_right = 0.426
+anchor_bottom = 1.0
+margin_right = 3.77597
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 5 )
+
+[node name="MapHeight" type="VSlider" parent="CanvasLayer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = 51.0
+margin_right = -358.0
+margin_bottom = -360.0
+min_value = 1.0
+max_value = 18.0
+value = 2.0
+rounded = true
+tick_count = 16
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/MapHeight"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -28.5
+margin_top = -33.0
+margin_right = 44.5
+margin_bottom = -208.0
+text = "Map Height"
+
+[node name="SliderLabel2" type="Label" parent="CanvasLayer/Panel/MapHeight"]
+anchor_left = 0.5
+anchor_top = 0.921
+anchor_right = 0.5
+anchor_bottom = 0.921
+margin_left = 30.5
+margin_top = -0.0690155
+margin_right = 54.5
+margin_bottom = 13.931
+size_flags_horizontal = 4
+text = "100"
+align = 1
+valign = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_initialized_": true
+}
+visibility_rule = 3
+
+[node name="MapSize" type="HSlider" parent="CanvasLayer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 122.0
+margin_top = 127.0
+margin_right = -11.0
+margin_bottom = -457.0
+min_value = 16.0
+max_value = 256.0
+value = 64.0
+rounded = true
+tick_count = 12
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/MapSize"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -36.03
+margin_right = -1.0
+margin_bottom = -22.03
+text = "Map Size"
+align = 1
+valign = 1
+
+[node name="SliderLabel2" type="Label" parent="CanvasLayer/Panel/MapSize"]
+anchor_left = 0.214
+anchor_top = 0.5
+anchor_right = 0.214
+anchor_bottom = 0.5
+margin_left = -11.274
+margin_top = 16.35
+margin_right = 12.726
+margin_bottom = 30.35
+size_flags_horizontal = 4
+text = "100"
+align = 1
+valign = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_initialized_": true
+}
+visibility_rule = 3
+
+[node name="Noise" type="Label" parent="CanvasLayer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 274.0
+margin_right = -2.0
+margin_bottom = -312.0
+text = "Noise Settings"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="NoiseOctaves" type="HSlider" parent="CanvasLayer/Panel"]
+anchor_left = 0.017
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.52
+margin_top = 319.0
+margin_right = -11.0
+margin_bottom = -265.0
+min_value = 1.0
+max_value = 9.0
+value = 5.0
+rounded = true
+tick_count = 9
+ticks_on_borders = true
+
+[node name="Octaves" type="Label" parent="CanvasLayer/Panel/NoiseOctaves"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -29.0
+margin_bottom = -15.0
+text = "Octaves"
+align = 1
+valign = 1
+
+[node name="SliderLabel2" type="Label" parent="CanvasLayer/Panel/NoiseOctaves"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 273.915
+margin_top = 10.0
+margin_right = -97.0
+margin_bottom = 30.0
+size_flags_horizontal = 4
+text = "100"
+align = 1
+valign = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_initialized_": true
+}
+visibility_rule = 3
+
+[node name="NoisePeriod" type="HSlider" parent="CanvasLayer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 17.0
+margin_top = 387.0
+margin_right = -11.0
+margin_bottom = -197.0
+min_value = 1.0
+step = 0.1
+value = 86.0
+
+[node name="Period" type="Label" parent="CanvasLayer/Panel/NoisePeriod"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -31.0
+margin_bottom = -17.0
+text = "Period"
+align = 1
+valign = 1
+
+[node name="SliderLabel2" type="Label" parent="CanvasLayer/Panel/NoisePeriod"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 72.0
+margin_top = 11.5
+margin_right = -292.0
+margin_bottom = 25.5
+size_flags_horizontal = 4
+text = "100"
+align = 1
+valign = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_initialized_": true
+}
+visibility_rule = 3
+
+[node name="NoisePersistence" type="HSlider" parent="CanvasLayer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 17.0
+margin_top = 465.0
+margin_right = -11.0
+margin_bottom = -119.0
+max_value = 1.0
+step = 0.01
+value = 0.86
+
+[node name="Persistence" type="Label" parent="CanvasLayer/Panel/NoisePersistence"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -29.0
+margin_bottom = -15.0
+text = "Persistence"
+align = 1
+valign = 1
+
+[node name="SliderLabel" type="Label" parent="CanvasLayer/Panel/NoisePersistence"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 280.0
+margin_top = 13.0
+margin_right = -70.0
+margin_bottom = 27.0
+size_flags_horizontal = 4
+text = "100"
+align = 1
+valign = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_initialized_": true
+}
+visibility_rule = 3
+
+[node name="GenerateMap" type="ToolButton" parent="CanvasLayer/Panel"]
+self_modulate = Color( 0.462745, 0.623529, 1, 1 )
+material = SubResource( 11 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 542.0
+margin_bottom = -15.0
+custom_styles/hover = SubResource( 10 )
+custom_styles/normal = SubResource( 7 )
+text = "Generate new map"
+icon = ExtResource( 3 )
+flat = false
+icon_align = 1
+expand_icon = true
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer"]
+anchor_right = 0.419
+anchor_bottom = 1.0
+margin_left = 332.0
+margin_top = 36.0
+margin_right = -21.056
+margin_bottom = -524.0
+pressed = true
+
+[node name="Label" type="Label" parent="CanvasLayer/CheckButton"]
+anchor_left = 0.461
+anchor_top = 0.5
+anchor_right = 0.461
+anchor_bottom = 0.5
+margin_left = -35.036
+margin_top = -38.0
+margin_right = 44.964
+margin_bottom = -24.0
+text = "Toggle panel"
+
+[connection signal="move_camera" from="GridMap" to="Camera" method="_on_GridMap_move_camera"]
+[connection signal="value_changed" from="CanvasLayer/Panel/MapHeight" to="GridMap" method="_on_MapHeight_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Panel/MapSize" to="GridMap" method="_on_MapSize_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Panel/NoiseOctaves" to="GridMap" method="_on_NoiseOctaves_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Panel/NoisePeriod" to="GridMap" method="_on_NoisePeriod_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Panel/NoisePersistence" to="GridMap" method="_on_NoisePersistence_value_changed"]
+[connection signal="button_down" from="CanvasLayer/Panel/GenerateMap" to="GridMap" method="_on_GenerateMap_button_down"]
+[connection signal="toggled" from="CanvasLayer/CheckButton" to="CanvasLayer/Panel" method="_on_CheckButton_toggled"]
