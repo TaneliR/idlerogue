@@ -119,6 +119,7 @@ omni_range = 1094.92
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
+visible = false
 anchor_right = 0.426
 anchor_bottom = 1.0
 margin_right = 3.77597

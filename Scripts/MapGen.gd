@@ -8,12 +8,13 @@ var player_instance
 var fog_nodes = []
 
 onready var allowed_spawn_points = [PoolVector3Array()]
-onready var map_size = 24
+onready var map_size = 36
 onready var map_height = 2
 onready var currentSeed
-onready var noise_octaves = 5
+onready var noise_octaves = 3
 onready var noise_period = 85.0
 onready var noise_persistence = 0.85
+onready var offset_from_origin = Vector3(.5, .5, .5)
 
 onready var player = preload("res://Scenes/Player.tscn")
 onready var enemy = preload("res://Scenes/Enemy.tscn")
@@ -49,10 +50,10 @@ func generate_new_map():
 	spawn_player()
 
 func populate_map():
-	for _i in range(8):
+	for _i in range(int(map_size / 4)):
 		var random_spawn_point = allowed_spawn_points.pop_at(rng.randi_range(0, allowed_spawn_points.size()-1))
 		var enemy_instance = enemy.instance()
-		enemy_instance.transform.origin = random_spawn_point as Vector3
+		enemy_instance.transform.origin = offset_from_origin + random_spawn_point as Vector3
 		add_child(enemy_instance)
 
 
@@ -72,7 +73,7 @@ func cleanup_map():
 func spawn_player():
 	var random_spawn_point = allowed_spawn_points.pop_at(rng.randi_range(0, allowed_spawn_points.size()-1))
 	player_instance = player.instance()
-	player_instance.transform.origin = random_spawn_point as Vector3
+	player_instance.transform.origin = offset_from_origin + random_spawn_point as Vector3
 	add_child(player_instance)
 	$PlayerCamera.set_target(player_instance.get_node("CameraAnchor"))
 	$PlayerCamera.make_current()
