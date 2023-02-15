@@ -54,6 +54,6 @@ item/0/preview = SubResource( 12 )
 item/1/name = "WALL"
 item/1/mesh = SubResource( 13 )
 item/1/mesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-item/1/shapes = [ SubResource( 9 ), Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 ) ]
+item/1/shapes = [ SubResource( 9 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
 item/1/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/1/preview = SubResource( 15 )

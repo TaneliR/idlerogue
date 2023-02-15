@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/MapgenCamera.gd" type="Script" id=1]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_energy = 3.32
+ambient_light_color = Color( 0.352941, 0.282353, 1, 1 )
+ambient_light_energy = 1.05
+ambient_light_sky_contribution = 0.0
+fog_sun_color = Color( 0.00784314, 1, 0.34902, 1 )
+fog_depth_enabled = false
+tonemap_white = 0.62
+ss_reflections_max_steps = 12
+ss_reflections_roughness = false
+glow_enabled = true
+glow_bloom = 0.27
+adjustment_enabled = true
+adjustment_brightness = 1.38
+adjustment_saturation = 1.64
+
+[node name="Camera" type="Camera"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 128, 128 )
+visible = false
+environment = SubResource( 1 )
+projection = 1
+current = true
+fov = 35.0
+size = 124.188
+far = 1063.5
+script = ExtResource( 1 )

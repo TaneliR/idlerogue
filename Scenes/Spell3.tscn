@@ -1,0 +1,231 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://Assets/Particles/fire_01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Particles/scorch_03.png" type="Texture" id=2]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.33
+
+[sub_resource type="SpatialMaterial" id=14]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=15]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 360 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
+
+[sub_resource type="Gradient" id=17]
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 17 )
+
+[sub_resource type="Curve" id=19]
+max_value = 2.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.229149, 0, 0, Vector2( 0.482759, 0.995454 ), 8.13977, 8.13977, 0, 0, Vector2( 1, 1.95909 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=20]
+curve = SubResource( 19 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector3( 1, 4, 1 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.1
+angular_velocity = 720.0
+angular_velocity_random = 1.0
+linear_accel = 0.4
+linear_accel_random = 1.0
+radial_accel = 0.1
+radial_accel_random = 1.0
+tangential_accel = 0.5
+tangential_accel_random = 1.0
+damping = 100.0
+damping_random = 1.0
+angle = 14.4
+angle_random = 1.0
+angle_curve = SubResource( 16 )
+scale = 3.0
+scale_random = 1.0
+scale_curve = SubResource( 20 )
+color = Color( 0.760784, 0.482353, 0.776471, 1 )
+color_ramp = SubResource( 18 )
+
+[sub_resource type="PrismMesh" id=21]
+left_to_right = 0.6
+size = Vector3( 0.22, 0.284, 0.129 )
+
+[sub_resource type="SpatialMaterial" id=22]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="Curve" id=23]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, -360 ), 0.0, -33.6496, 0, 0, Vector2( 1, -4.90909 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=24]
+curve = SubResource( 23 )
+
+[sub_resource type="Curve" id=25]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, -351.818 ), 0.0, 0.0, 0, 0, Vector2( 0.994695, -285.545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=26]
+curve = SubResource( 25 )
+
+[sub_resource type="Gradient" id=27]
+offsets = PoolRealArray( 0, 0.254237, 0.488701, 0.844633, 0.99435, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.602539, 0.600185, 0.600185, 1, 0.179348, 0.179348, 0.179348, 1, 1, 1, 1, 0.231373, 0, 0, 0, 0.454902, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=28]
+gradient = SubResource( 27 )
+
+[sub_resource type="Curve" id=29]
+max_value = 4.0
+_data = [ Vector2( 0, 0.118182 ), 0.0, 8.35398, 0, 0, Vector2( 1, 0 ), -21.8489, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=30]
+curve = SubResource( 29 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+emission_shape = 1
+emission_sphere_radius = 0.05
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 4.0
+angular_velocity_random = 1.0
+angular_velocity_curve = SubResource( 26 )
+angle_random = 1.0
+angle_curve = SubResource( 24 )
+scale = 1.5
+scale_random = 1.0
+scale_curve = SubResource( 30 )
+color = Color( 0.458824, 0, 0.145098, 1 )
+color_ramp = SubResource( 28 )
+
+[sub_resource type="QuadMesh" id=13]
+
+[sub_resource type="SpatialMaterial" id=31]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=32]
+emission_shape = 1
+emission_sphere_radius = 0.05
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 4.0
+angular_velocity_random = 1.0
+angular_velocity_curve = SubResource( 26 )
+angle_random = 1.0
+angle_curve = SubResource( 24 )
+scale = 1.5
+scale_random = 1.0
+scale_curve = SubResource( 30 )
+color = Color( 0.172549, 0.439216, 0.654902, 1 )
+color_ramp = SubResource( 28 )
+
+[sub_resource type="SpatialMaterial" id=33]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="Gradient" id=34]
+offsets = PoolRealArray( 0, 0.638418, 1 )
+colors = PoolColorArray( 0, 1, 0.648438, 1, 0, 0.474609, 0.307754, 0.0593221, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=35]
+gradient = SubResource( 34 )
+
+[sub_resource type="CurveTexture" id=36]
+curve = SubResource( 29 )
+
+[sub_resource type="ParticlesMaterial" id=37]
+emission_shape = 1
+emission_sphere_radius = 0.05
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 4.0
+angular_velocity_random = 1.0
+angular_velocity_curve = SubResource( 26 )
+angle_random = 1.0
+angle_curve = SubResource( 24 )
+scale = 1.5
+scale_random = 1.0
+scale_curve = SubResource( 36 )
+color = Color( 0.172549, 0.439216, 0.654902, 0.376471 )
+color_ramp = SubResource( 35 )
+
+[node name="Spell" type="RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.197077, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Particles" type="Particles" parent="."]
+visible = false
+material_override = SubResource( 14 )
+amount = 4
+speed_scale = 1.5
+explosiveness = 0.11
+randomness = 1.0
+fract_delta = false
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 21 )
+
+[node name="Particles2" type="Particles" parent="."]
+material_override = SubResource( 22 )
+lifetime = 0.5
+speed_scale = 0.1
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 12 )
+draw_pass_1 = SubResource( 13 )
+
+[node name="Particles3" type="Particles" parent="."]
+material_override = SubResource( 31 )
+lifetime = 0.5
+speed_scale = 0.1
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 32 )
+draw_pass_1 = SubResource( 13 )
+
+[node name="Particles4" type="Particles" parent="."]
+material_override = SubResource( 33 )
+amount = 6
+lifetime = 0.1
+speed_scale = 0.05
+explosiveness = 0.08
+local_coords = false
+process_material = SubResource( 37 )
+draw_pass_1 = SubResource( 13 )

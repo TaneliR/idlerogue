@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/CursorSelector.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/CursorSelectorMeshDefault.tres" type="CubeMesh" id=2]
+
+[node name="CursorSelector" type="MeshInstance"]
+mesh = ExtResource( 2 )
+script = ExtResource( 1 )

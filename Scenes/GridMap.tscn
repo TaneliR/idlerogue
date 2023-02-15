@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scripts/AStar.gd" type="Script" id=1]
+[ext_resource path="res://mapgenmeshlib.tres" type="MeshLibrary" id=2]
+[ext_resource path="res://Scenes/Marker.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/PlayerCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/CursorSelector.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/MapGen.gd" type="Script" id=6]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.193734, 0.00425219, 0.27214, 1, 0.393757, 0.275064, 0.442871, 1 )
+
+[sub_resource type="GradientTexture2D" id=2]
+flags = 32
+gradient = SubResource( 1 )
+fill = 1
+fill_from = Vector2( 0.504167, 0.540104 )
+fill_to = Vector2( 0.334, 0 )
+repeat = 2
+
+[sub_resource type="PanoramaSky" id=3]
+panorama = SubResource( 2 )
+
+[sub_resource type="Environment" id=4]
+background_mode = 2
+background_sky = SubResource( 3 )
+background_sky_custom_fov = 136.8
+background_energy = 0.25
+ambient_light_color = Color( 1, 0.690196, 0.690196, 1 )
+ambient_light_energy = 3.57
+ambient_light_sky_contribution = 0.75
+fog_color = Color( 0.490196, 0.0392157, 0.580392, 0.729412 )
+fog_sun_color = Color( 0, 0, 0, 1 )
+fog_sun_amount = 0.48
+fog_depth_end = 40.0
+auto_exposure_enabled = true
+auto_exposure_scale = 0.25
+auto_exposure_speed = 1.0
+ssao_enabled = true
+
+[sub_resource type="SpatialMaterial" id=14]
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 0, 0.0941176, 0.913725, 0.290196 )
+
+[sub_resource type="CubeMesh" id=15]
+material = SubResource( 14 )
+size = Vector3( 1, 0.1, 1 )
+
+[node name="GridMap" type="GridMap" groups=["pathable"]]
+mesh_library = ExtResource( 2 )
+cell_size = Vector3( 1, 1, 1 )
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 4, 0 )
+}
+
+[node name="PlayerCamera" parent="." instance=ExtResource( 4 )]
+environment = SubResource( 4 )
+current = true
+fov = 65.0
+size = 25.0
+far = 256.0
+
+[node name="Marker" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="AStar" type="Spatial" parent="."]
+script = ExtResource( 1 )
+should_draw_cubes = true
+
+[node name="CursorSelector" parent="." instance=ExtResource( 5 )]
+mesh = SubResource( 15 )
+
+[connection signal="mapgen_finished" from="." to="AStar" method="_on_GridMap_mapgen_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/character.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Assets/arrow.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Healthbar3D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/HealthCounter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://chr_knight.png" type="Texture" id=7]
+[ext_resource path="res://Assets/player.obj" type="ArrayMesh" id=8]
 
 [sub_resource type="AtlasTexture" id=10]
 flags = 2
@@ -69,13 +71,25 @@ rings = 24
 [sub_resource type="BoxShape" id=17]
 extents = Vector3( 0.5, 0.5, 0.5 )
 
+[sub_resource type="SpatialMaterial" id=30]
+flags_vertex_lighting = true
+params_diffuse_mode = 3
+params_specular_mode = 3
+params_billboard_keep_scale = true
+albedo_texture = ExtResource( 7 )
+metallic = 0.28
+metallic_specular = 0.14
+roughness = 0.83
+
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.5, 0 )
+visible = false
 billboard = 1
 frames = SubResource( 16 )
+frame = 3
 playing = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -138,6 +152,11 @@ transform = Transform( 1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0 )
 
 [node name="HealthCounter" parent="." instance=ExtResource( 6 )]
+
+[node name="VoxelPlayer" type="MeshInstance" parent="."]
+mesh = ExtResource( 8 )
+skeleton = NodePath("")
+material/0 = SubResource( 30 )
 
 [connection signal="money_changed" from="." to="." method="_on_Player_money_changed"]
 [connection signal="update_health" from="." to="HealthCounter" method="_on_Player_update_health"]

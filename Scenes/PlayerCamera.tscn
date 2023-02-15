@@ -34,8 +34,9 @@ auto_exposure_speed = 1.0
 ssao_enabled = true
 
 [node name="PlayerCamera" type="InterpolatedCamera"]
-transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 15, 8 )
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 24, 8 )
 environment = SubResource( 4 )
 size = 15.0
+speed = 2.0
 enabled = true
 script = ExtResource( 1 )
