@@ -6,7 +6,7 @@ onready var noise = OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
 var player_instance
 var fog_nodes = []
-
+export (int) onready var enemy_count
 onready var allowed_spawn_points = []
 export (int) onready var map_size
 export (int) onready var map_height
@@ -14,7 +14,7 @@ export (int) onready var currentSeed
 export (int) onready var noise_octaves
 export (float) onready var noise_period
 export (float) onready var noise_persistence
-onready var offset_from_origin = Vector3(.5, -.5, -.5)
+onready var offset_from_origin = Vector3(.5, .5, -.5)
 
 onready var player = preload("res://Scenes/Player.tscn")
 onready var enemy = preload("res://Scenes/Enemy.tscn")
@@ -61,7 +61,7 @@ func add_fog_node(pos: Vector3):
 	# add_child(fog_instance)
 
 func populate_map():
-	for _i in range(int(map_size / 4)):
+	for _i in range(enemy_count):
 		var random_spawn_point = allowed_spawn_points.pop_at(rng.randi_range(0, allowed_spawn_points.size()-1))
 		var enemy_instance = enemy.instance()
 		if random_spawn_point:

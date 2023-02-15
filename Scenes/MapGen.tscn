@@ -45,6 +45,7 @@ region_rect = Rect2( 0, 0, 2048, 1 )
 [node name="MapGen" type="Spatial"]
 
 [node name="GridMap" parent="." instance=ExtResource( 1 )]
+enemy_count = 4
 map_size = 52
 map_height = 1
 currentSeed = 22

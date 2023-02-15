@@ -1,5 +1,6 @@
 extends KinematicBody
 
+export var damage = 100
 export var speed = 250
 export var g = Vector3.DOWN * .02
 export (bool) var gravity = false
@@ -15,6 +16,9 @@ func _physics_process(delta):
 		var col = move_and_collide(velocity * speed * delta)
 		if (col):
 			stop = true
+			if(col.collider.is_in_group("enemy")):
+				print("HIT enem")
+				col.collider.take_damage(damage)
 			yield(get_tree().create_timer(.35), "timeout")
 			destruct()
 	# look_at(transform.origin + velocity.normalized(), Vector3.UP)

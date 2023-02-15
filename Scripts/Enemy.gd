@@ -12,7 +12,8 @@ onready var moving = false;
 var player_instance;
 
 func _ready():
-	var _move = move_and_slide(Vector3(1, 0, 1) * 2, Vector3.UP)
+	var _move = move_and_slide(Vector3(.5, .5, .5), Vector3.UP)
+	# var _move = move_and_slide(Vector3(1, 0, 1) * 2, Vector3.UP)
 	health = max_health;
 	add_to_group("enemy")
 	rng.randomize()
