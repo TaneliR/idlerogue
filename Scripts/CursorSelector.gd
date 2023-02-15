@@ -1,7 +1,7 @@
 extends MeshInstance
 onready var camera = get_parent().get_node("PlayerCamera")
 onready var nav = get_parent().get_node("AStar")
-onready var selector_mesh = preload("res://Scenes/CursorSelectorMeshDefault.tres")
+onready var selector_mesh = preload("res://MeshInstances/CursorSelectorMeshDefault.tres")
 var current_path_parent
 
 func _input(event):

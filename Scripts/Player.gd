@@ -4,6 +4,7 @@ onready var marker = get_parent().get_node("Marker")
 onready var nav = get_parent().get_node("AStar")
 var path := []
 var current_target := Vector3.INF
+var current_look_target := Vector3.INF
 var current_velocity := Vector3.ZERO
 var speed := 5.0
 var moving = false;
@@ -29,7 +30,7 @@ signal update_health
 const coin_type = preload("res://Scripts/Coins.gd")
 const fog_type = preload("res://Scenes/FogOfWarMesh.tscn")
 
-var spell = preload("res://Scenes/Spell.tscn")
+var spell = preload("res://Scenes/Spell3.tscn")
 var spell_body = KinematicBody.new()
 var spell_mesh = MeshInstance.new()
 
@@ -48,7 +49,8 @@ func _physics_process(delta: float) -> void:
 	var lerp_weight = delta * 8.0
 	if current_target != Vector3.INF:
 		var dir_to_target = global_transform.origin.direction_to(current_target).normalized()
-		look_at(transform.origin + dir_to_target, Vector3.UP)
+		look_at(transform.origin + global_transform.origin.direction_to(current_look_target).normalized(), Vector3.UP)
+
 		new_velocity = lerp(current_velocity, speed * dir_to_target, lerp_weight)
 		if global_transform.origin.distance_to(current_target) < 0.5:
 			find_next_point_in_path()
@@ -83,6 +85,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var result = space_state.intersect_ray(from, to, [marker, self])
 		if result != null and not result.empty() and result.collider.is_in_group("pathable"):
 			var closest_center = nav.astar.get_point_position(nav.astar.get_closest_point(result.position))
+			current_look_target = closest_center
 			if event.is_action_pressed("click"):
 				update_path(nav.find_path(transform.origin, result.position))
 				marker.global_transform.origin = closest_center

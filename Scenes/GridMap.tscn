@@ -73,7 +73,6 @@ visible = false
 
 [node name="AStar" type="Spatial" parent="."]
 script = ExtResource( 1 )
-should_draw_cubes = true
 
 [node name="CursorSelector" parent="." instance=ExtResource( 5 )]
 mesh = SubResource( 15 )
