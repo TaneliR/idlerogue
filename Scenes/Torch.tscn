@@ -1,0 +1,169 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://Assets/torch.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/torch.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Particles/flame_03.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Particles/flame_05.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=31]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="Animation" id=67]
+resource_name = "flicker"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:light_specular")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 3.486, 4.734, 4.587, 4.0, 3.339, 4.405 ]
+}
+
+[sub_resource type="Gradient" id=48]
+offsets = PoolRealArray( 0.0875706, 0.305085, 0.672316, 0.79661, 1 )
+colors = PoolColorArray( 0.387006, 0.387006, 0.387006, 1, 0.0705882, 0.0705882, 0.0705882, 0.713726, 0.101961, 0.101961, 0.101961, 0.533333, 0.0588235, 0.0588235, 0.0588235, 0, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=49]
+gradient = SubResource( 48 )
+
+[sub_resource type="Curve" id=50]
+_data = [ Vector2( 0, 0.298864 ), 0.0, 1.75349, 0, 0, Vector2( 1, 1 ), 1.64938, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=51]
+curve = SubResource( 50 )
+
+[sub_resource type="ParticlesMaterial" id=52]
+emission_shape = 1
+emission_sphere_radius = 0.05
+direction = Vector3( 0, 1, 0 )
+spread = 37.8
+gravity = Vector3( 0, 1, 0 )
+angle = 720.0
+angle_random = 1.0
+scale = 0.6
+scale_random = 1.0
+scale_curve = SubResource( 51 )
+color = Color( 0.247059, 0.247059, 0.247059, 1 )
+color_ramp = SubResource( 49 )
+
+[sub_resource type="SpatialMaterial" id=53]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="QuadMesh" id=54]
+material = SubResource( 53 )
+
+[sub_resource type="SpatialMaterial" id=55]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 4 )
+
+[sub_resource type="Curve" id=56]
+min_value = -15.0
+max_value = 15.0
+_data = [ Vector2( 0, 15 ), 0.0, -56.2721, 0, 0, Vector2( 0.450928, -3.31818 ), 56.6958, 56.6958, 0, 0, Vector2( 0.785146, 1.77273 ), -138.621, -138.621, 0, 0, Vector2( 1, -10 ), 24.1925, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=57]
+curve = SubResource( 56 )
+
+[sub_resource type="CurveTexture" id=58]
+
+[sub_resource type="Gradient" id=59]
+offsets = PoolRealArray( 0, 0.146893, 0.49435, 0.855932, 1 )
+colors = PoolColorArray( 0.611765, 0.611765, 0.611765, 0.603922, 0.552941, 0.552941, 0.552941, 0.337255, 0.409668, 0.409668, 0.409668, 0.52549, 1, 1, 1, 0.462745, 0.14902, 0.14902, 0.14902, 0.698039 )
+
+[sub_resource type="GradientTexture" id=60]
+gradient = SubResource( 59 )
+
+[sub_resource type="Curve" id=61]
+min_value = -1.0
+max_value = 2.0
+_data = [ Vector2( 0, 0.602273 ), 0.0, 0.437524, 0, 0, Vector2( 0.480106, 0.793182 ), -2.8275, -2.8275, 0, 0, Vector2( 0.612732, 0.00909114 ), -13.6312, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=62]
+curve = SubResource( 61 )
+
+[sub_resource type="Gradient" id=63]
+offsets = PoolRealArray( 0, 0.279661, 0.601695, 0.858757, 0.954802 )
+colors = PoolColorArray( 0.85098, 0.776471, 0, 0.72549, 0.964844, 0.364172, 0.00376892, 0.709804, 0.384314, 0, 0, 1, 0.894118, 0, 0, 0.290196, 0.176471, 0.176471, 0.176471, 0.568627 )
+
+[sub_resource type="GradientTexture" id=64]
+gradient = SubResource( 63 )
+
+[sub_resource type="ParticlesMaterial" id=65]
+trail_color_modifier = SubResource( 64 )
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector3( 0, 1, 0 )
+spread = 89.1
+flatness = 1.0
+gravity = Vector3( 0, 0.2, 0 )
+angular_velocity = 4.0
+angular_velocity_random = 1.0
+angular_velocity_curve = SubResource( 58 )
+angle = -10.0
+angle_random = 1.0
+angle_curve = SubResource( 57 )
+scale = 1.25
+scale_random = 1.0
+scale_curve = SubResource( 62 )
+color = Color( 0.956863, 0.403922, 0, 0.815686 )
+color_ramp = SubResource( 60 )
+hue_variation = 0.21
+hue_variation_random = 0.28
+
+[sub_resource type="QuadMesh" id=66]
+
+[node name="Torch" type="MeshInstance"]
+transform = Transform( 0.993552, -0.103617, 0.0460186, 0.113377, 0.908028, -0.403274, 6.96155e-09, 0.405891, 0.913921, -0.28587, 0.594788, 0.302331 )
+mesh = ExtResource( 1 )
+material/0 = SubResource( 31 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, -6.07289e-07, 1.19898e-07, 1.07101e-08, 1, 2.98023e-07, -3.83667e-09, -1.78814e-07, 1, -0.0076732, 0.696779, 0.0302448 )
+light_color = Color( 0.952941, 0.72549, 0.286275, 1 )
+light_energy = 7.154
+light_indirect_energy = 0.0
+light_specular = 4.22
+omni_range = 40.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OmniLight"]
+autoplay = "flicker"
+playback_speed = 0.4
+anims/flicker = SubResource( 67 )
+
+[node name="Smoke" type="Particles" parent="."]
+transform = Transform( 1.00001, -1.86934e-08, -1.37147e-07, 1.00883e-07, 1, -2.98023e-08, -2.2589e-08, -1.60933e-06, 1, 0.0489339, 0.478508, -0.0618701 )
+amount = 14
+lifetime = 1.5
+speed_scale = 0.8
+randomness = 0.4
+process_material = SubResource( 52 )
+draw_pass_1 = SubResource( 54 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1.00001, -1.12431e-08, -6.76195e-09, 1.11333e-08, 1, 1.78814e-07, -2.88368e-09, -5.96046e-08, 1, 0.0434764, 0.601272, -0.103359 )
+material_override = SubResource( 55 )
+amount = 24
+lifetime = 1.5
+randomness = 1.0
+process_material = SubResource( 65 )
+draw_pass_1 = SubResource( 66 )

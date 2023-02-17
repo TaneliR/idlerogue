@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/GridMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/ccbbb.png" type="Texture" id=3]
 [ext_resource path="res://addons/SliderLabel/SliderLabel.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/MapgenPanel.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Quickbar.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0.027451, 0, 0.0980392, 0.8, 0.0235294, 0.0235294, 0.0235294, 0.858824 )
@@ -78,31 +80,46 @@ light_specular = 0.4
 light_bake_mode = 2
 omni_range = 1094.92
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.014
+anchor_bottom = 1.01
+margin_right = -0.33606
+mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
-visible = false
-anchor_right = 0.426
+[node name="Quickbar" parent="Control" instance=ExtResource( 6 )]
+margin_right = -17.0
+margin_bottom = -3.0
+mouse_filter = 2
+
+[node name="UI" parent="Control" instance=ExtResource( 2 )]
+follow_viewport_enable = true
+
+[node name="DebugPanel" type="Control" parent="Control"]
+anchor_right = 0.298
 anchor_bottom = 1.0
-margin_right = 3.77597
+margin_right = -309.324
+margin_bottom = -606.0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Control/DebugPanel"]
+visible = false
+margin_right = 368.0
+margin_bottom = 603.0
 custom_styles/panel = SubResource( 4 )
 script = ExtResource( 5 )
 
-[node name="MapHeight" type="VSlider" parent="CanvasLayer/Panel"]
+[node name="MapHeight" type="VSlider" parent="Control/DebugPanel/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 25.0
-margin_top = 51.0
-margin_right = -358.0
-margin_bottom = -360.0
+margin_left = 311.0
+margin_top = 83.0
+margin_right = -41.0
+margin_bottom = -431.0
 min_value = 1.0
 max_value = 18.0
 value = 2.0
-rounded = true
-tick_count = 16
-ticks_on_borders = true
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel/MapHeight"]
+[node name="Label" type="Label" parent="Control/DebugPanel/Panel/MapHeight"]
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -112,7 +129,7 @@ margin_right = 44.5
 margin_bottom = -208.0
 text = "Map Height"
 
-[node name="SliderLabel2" type="Label" parent="CanvasLayer/Panel/MapHeight"]
+[node name="SliderLabel2" type="Label" parent="Control/DebugPanel/Panel/MapHeight"]
 anchor_left = 0.5
 anchor_top = 0.921
 anchor_right = 0.5
@@ -131,13 +148,13 @@ __meta__ = {
 }
 visibility_rule = 3
 
-[node name="MapSize" type="HSlider" parent="CanvasLayer/Panel"]
+[node name="MapSize" type="HSlider" parent="Control/DebugPanel/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 122.0
-margin_top = 127.0
-margin_right = -11.0
-margin_bottom = -457.0
+margin_left = 40.0
+margin_top = 209.0
+margin_right = -93.0
+margin_bottom = -375.0
 min_value = 16.0
 max_value = 256.0
 value = 64.0
@@ -145,7 +162,7 @@ rounded = true
 tick_count = 12
 ticks_on_borders = true
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel/MapSize"]
+[node name="Label" type="Label" parent="Control/DebugPanel/Panel/MapSize"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -156,7 +173,7 @@ text = "Map Size"
 align = 1
 valign = 1
 
-[node name="SliderLabel2" type="Label" parent="CanvasLayer/Panel/MapSize"]
+[node name="SliderLabel2" type="Label" parent="Control/DebugPanel/Panel/MapSize"]
 anchor_left = 0.214
 anchor_top = 0.5
 anchor_right = 0.214
@@ -175,7 +192,7 @@ __meta__ = {
 }
 visibility_rule = 3
 
-[node name="Noise" type="Label" parent="CanvasLayer/Panel"]
+[node name="Noise" type="Label" parent="Control/DebugPanel/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 274.0
@@ -186,7 +203,7 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="NoiseOctaves" type="HSlider" parent="CanvasLayer/Panel"]
+[node name="NoiseOctaves" type="HSlider" parent="Control/DebugPanel/Panel"]
 anchor_left = 0.017
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -201,7 +218,7 @@ rounded = true
 tick_count = 9
 ticks_on_borders = true
 
-[node name="Octaves" type="Label" parent="CanvasLayer/Panel/NoiseOctaves"]
+[node name="Octaves" type="Label" parent="Control/DebugPanel/Panel/NoiseOctaves"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -211,7 +228,7 @@ text = "Octaves"
 align = 1
 valign = 1
 
-[node name="SliderLabel2" type="Label" parent="CanvasLayer/Panel/NoiseOctaves"]
+[node name="SliderLabel2" type="Label" parent="Control/DebugPanel/Panel/NoiseOctaves"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -229,7 +246,7 @@ __meta__ = {
 }
 visibility_rule = 3
 
-[node name="NoisePeriod" type="HSlider" parent="CanvasLayer/Panel"]
+[node name="NoisePeriod" type="HSlider" parent="Control/DebugPanel/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 17.0
@@ -240,7 +257,7 @@ min_value = 1.0
 step = 0.1
 value = 86.0
 
-[node name="Period" type="Label" parent="CanvasLayer/Panel/NoisePeriod"]
+[node name="Period" type="Label" parent="Control/DebugPanel/Panel/NoisePeriod"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -250,7 +267,7 @@ text = "Period"
 align = 1
 valign = 1
 
-[node name="SliderLabel2" type="Label" parent="CanvasLayer/Panel/NoisePeriod"]
+[node name="SliderLabel2" type="Label" parent="Control/DebugPanel/Panel/NoisePeriod"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -268,7 +285,7 @@ __meta__ = {
 }
 visibility_rule = 3
 
-[node name="NoisePersistence" type="HSlider" parent="CanvasLayer/Panel"]
+[node name="NoisePersistence" type="HSlider" parent="Control/DebugPanel/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 17.0
@@ -279,7 +296,7 @@ max_value = 1.0
 step = 0.01
 value = 0.86
 
-[node name="Persistence" type="Label" parent="CanvasLayer/Panel/NoisePersistence"]
+[node name="Persistence" type="Label" parent="Control/DebugPanel/Panel/NoisePersistence"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -289,7 +306,7 @@ text = "Persistence"
 align = 1
 valign = 1
 
-[node name="SliderLabel" type="Label" parent="CanvasLayer/Panel/NoisePersistence"]
+[node name="SliderLabel" type="Label" parent="Control/DebugPanel/Panel/NoisePersistence"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -307,7 +324,7 @@ __meta__ = {
 }
 visibility_rule = 3
 
-[node name="GenerateMap" type="ToolButton" parent="CanvasLayer/Panel"]
+[node name="GenerateMap" type="ToolButton" parent="Control/DebugPanel/Panel"]
 self_modulate = Color( 0.462745, 0.623529, 1, 1 )
 material = SubResource( 11 )
 anchor_right = 1.0
@@ -322,16 +339,13 @@ flat = false
 icon_align = 1
 expand_icon = true
 
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer"]
-anchor_right = 0.419
-anchor_bottom = 1.0
-margin_left = 332.0
-margin_top = 36.0
-margin_right = -21.056
-margin_bottom = -524.0
-pressed = true
+[node name="CheckButton" type="CheckButton" parent="Control/DebugPanel"]
+margin_left = 122.0
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 68.0
 
-[node name="Label" type="Label" parent="CanvasLayer/CheckButton"]
+[node name="Label" type="Label" parent="Control/DebugPanel/CheckButton"]
 anchor_left = 0.461
 anchor_top = 0.5
 anchor_right = 0.461
@@ -342,5 +356,5 @@ margin_right = 44.964
 margin_bottom = -24.0
 text = "Toggle panel"
 
-[connection signal="button_down" from="CanvasLayer/Panel/GenerateMap" to="GridMap" method="_on_GenerateMap_button_down"]
-[connection signal="toggled" from="CanvasLayer/CheckButton" to="CanvasLayer/Panel" method="_on_CheckButton_toggled"]
+[connection signal="button_down" from="Control/DebugPanel/Panel/GenerateMap" to="GridMap" method="_on_GenerateMap_button_down"]
+[connection signal="toggled" from="Control/DebugPanel/CheckButton" to="Control/DebugPanel/Panel" method="_on_CheckButton_toggled"]

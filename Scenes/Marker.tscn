@@ -17,4 +17,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 mesh = SubResource( 13 )
 
 [node name="CameraAnchor" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 15, 10 )
+transform = Transform( 1, 0, 0, 0, 0.707106, 0.707106, 0, -0.707106, 0.707106, 0, 15, 15 )

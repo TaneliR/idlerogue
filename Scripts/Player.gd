@@ -6,7 +6,7 @@ var path := []
 var current_target := Vector3.INF
 var current_look_target := Vector3.INF
 var current_velocity := Vector3.ZERO
-var speed := 5.0
+var speed := 2
 var moving = false;
 var tile_size = 1;
 var attack_power = 3;
@@ -36,6 +36,7 @@ var spell_mesh = MeshInstance.new()
 
 func _ready():
 	var _move = move_and_slide(Vector3(.5, .5, .5), Vector3.UP)
+	
 	regen_tick = regen_rate;
 	health = max_health;
 	emit_signal("update_health", max_health);
@@ -46,13 +47,13 @@ func _ready():
 # AStar
 func _physics_process(delta: float) -> void:
 	var new_velocity := Vector3.ZERO
-	var lerp_weight = delta * 8.0
+	var lerp_weight = delta * 12.0
 	if current_target != Vector3.INF:
 		var dir_to_target = global_transform.origin.direction_to(current_target).normalized()
 		look_at(transform.origin + global_transform.origin.direction_to(current_look_target).normalized(), Vector3.UP)
 
 		new_velocity = lerp(current_velocity, speed * dir_to_target, lerp_weight)
-		if global_transform.origin.distance_to(current_target) < 0.5:
+		if global_transform.origin.distance_to(current_target) < 0.1:
 			find_next_point_in_path()
 	else:
 		new_velocity = lerp(current_velocity, Vector3.ZERO, lerp_weight)
@@ -63,12 +64,17 @@ func find_next_point_in_path():
 		var new_target = path.pop_front()
 		new_target.y = global_transform.origin.y
 		current_target = new_target
+		var action = { "target": self, "time": path.size() * speed}
+		TickManager.emit_signal("tick", action.time)
 	else:
 		current_target = Vector3.INF
 
 func update_path(new_path: Array):
 	path = new_path
 	find_next_point_in_path()
+	
+func act():
+	print("E")
 
 # func _unhandled_input(event):
 # 	for dir in inputs.keys():
@@ -82,12 +88,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		var to = camera.project_ray_normal(e.position) * 1000
 
 		var space_state = get_world().direct_space_state
-		var result = space_state.intersect_ray(from, to, [marker, self])
-		if result != null and not result.empty() and result.collider.is_in_group("pathable"):
-			var closest_center = nav.astar.get_point_position(nav.astar.get_closest_point(result.position))
+		var result = space_state.intersect_ray(from, to, [self], 5)
+		if result != null and not result.empty():
+			var stepified = Vector3(stepify(result.position.x + .5, .5), result.position.y ,stepify(result.position.z, .5))
+			var closest_astar_id = nav.astar.get_closest_point(stepified)
+			var closest_center = nav.astar.get_point_position(closest_astar_id)
+			
+			print("ID", closest_astar_id)
+			print("Real Point", result.position)
+			print("Stepified point", stepified)
+			print("Closest center", closest_center)
 			current_look_target = closest_center
-			if event.is_action_pressed("click"):
-				update_path(nav.find_path(transform.origin, result.position))
+			if event.is_action_pressed("click") and result.collider.is_in_group("pathable"):
+				update_path(nav.find_path(transform.origin, closest_center))
 				marker.global_transform.origin = closest_center
 			elif event.is_action_pressed("right_click"):
 				var new_spell = spell.instance()

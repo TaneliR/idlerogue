@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/AStar.gd" type="Script" id=1]
 [ext_resource path="res://mapgenmeshlib.tres" type="MeshLibrary" id=2]
@@ -7,36 +7,44 @@
 [ext_resource path="res://Scenes/CursorSelector.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/MapGen.gd" type="Script" id=6]
 
-[sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 0.193734, 0.00425219, 0.27214, 1, 0.393757, 0.275064, 0.442871, 1 )
-
-[sub_resource type="GradientTexture2D" id=2]
-flags = 32
-gradient = SubResource( 1 )
-fill = 1
-fill_from = Vector2( 0.504167, 0.540104 )
-fill_to = Vector2( 0.334, 0 )
-repeat = 2
-
-[sub_resource type="PanoramaSky" id=3]
-panorama = SubResource( 2 )
+[sub_resource type="ProceduralSky" id=16]
+sky_top_color = Color( 0.258824, 0, 0.517647, 1 )
+sky_horizon_color = Color( 0.996078, 0.396078, 1, 1 )
+sky_energy = 0.35
+ground_bottom_color = Color( 0.0235294, 0.0901961, 0.054902, 1 )
+ground_horizon_color = Color( 0.168627, 0.294118, 0.109804, 1 )
+ground_energy = 0.67
+sun_latitude = 84.59
+sun_angle_min = 32.22
+sun_angle_max = 46.73
 
 [sub_resource type="Environment" id=4]
 background_mode = 2
-background_sky = SubResource( 3 )
-background_sky_custom_fov = 136.8
-background_energy = 0.25
-ambient_light_color = Color( 1, 0.690196, 0.690196, 1 )
-ambient_light_energy = 3.57
-ambient_light_sky_contribution = 0.75
-fog_color = Color( 0.490196, 0.0392157, 0.580392, 0.729412 )
-fog_sun_color = Color( 0, 0, 0, 1 )
-fog_sun_amount = 0.48
-fog_depth_end = 40.0
+background_sky = SubResource( 16 )
+background_sky_custom_fov = 170.0
+background_sky_orientation = Basis( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107 )
+background_color = Color( 0.45098, 1, 0.67451, 1 )
+background_energy = 2.6
+ambient_light_color = Color( 0.905882, 0.607843, 1, 1 )
+ambient_light_energy = 16.0
+fog_enabled = true
+fog_color = Color( 0.141176, 0.0313726, 0.498039, 1 )
+fog_sun_color = Color( 0.0352941, 0.0470588, 0.568627, 1 )
+fog_depth_begin = 0.0
+fog_depth_end = 157.7
+fog_depth_curve = 0.637279
 auto_exposure_enabled = true
-auto_exposure_scale = 0.25
-auto_exposure_speed = 1.0
-ssao_enabled = true
+auto_exposure_scale = 1.51
+auto_exposure_min_luma = 1.25
+auto_exposure_max_luma = 12.47
+glow_intensity = 3.62
+glow_strength = 0.94
+glow_bloom = 0.13
+glow_blend_mode = 0
+adjustment_enabled = true
+adjustment_brightness = 0.8
+adjustment_contrast = 1.43
+adjustment_saturation = 1.12
 
 [sub_resource type="SpatialMaterial" id=14]
 flags_transparent = true
@@ -62,9 +70,10 @@ __meta__ = {
 }
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 8 )
 environment = SubResource( 4 )
 current = true
-fov = 65.0
+fov = 30.0
 size = 25.0
 far = 256.0
 

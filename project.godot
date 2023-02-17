@@ -8,10 +8,24 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://Scripts/Entity.gd"
+} ]
+_global_script_class_icons={
+"Entity": ""
+}
+
 [application]
 
 config/name="IdleRogue"
 run/main_scene="res://Scenes/MapGen.tscn"
+
+[autoload]
+
+TickManager="*res://Scripts/TickManager.gd"
 
 [display]
 

@@ -190,6 +190,7 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 3 )
+damage = 5
 speed = 12
 g = Vector3( 0, 0, 0 )
 

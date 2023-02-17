@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/flame_06.png-670bca27fe522b5e711c1170a3ce34f8.s3tc.stex"
-path.etc2="res://.import/flame_06.png-670bca27fe522b5e711c1170a3ce34f8.etc2.stex"
+path.s3tc="res://.import/torch.png-9dcdb558c4dce50b062859942a992675.s3tc.stex"
+path.etc2="res://.import/torch.png-9dcdb558c4dce50b062859942a992675.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Particles/flame_06.png"
-dest_files=[ "res://.import/flame_06.png-670bca27fe522b5e711c1170a3ce34f8.s3tc.stex", "res://.import/flame_06.png-670bca27fe522b5e711c1170a3ce34f8.etc2.stex" ]
+source_file="res://Assets/torch.png"
+dest_files=[ "res://.import/torch.png-9dcdb558c4dce50b062859942a992675.s3tc.stex", "res://.import/torch.png-9dcdb558c4dce50b062859942a992675.etc2.stex" ]
 
 [params]
 

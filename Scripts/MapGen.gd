@@ -14,7 +14,7 @@ export (int) onready var currentSeed
 export (int) onready var noise_octaves
 export (float) onready var noise_period
 export (float) onready var noise_persistence
-onready var offset_from_origin = Vector3(.5, .5, -.5)
+onready var offset_from_origin = Vector3(0, 0, 0)
 
 onready var player = preload("res://Scenes/Player.tscn")
 onready var enemy = preload("res://Scenes/Enemy.tscn")
@@ -54,12 +54,12 @@ func generate_new_map():
 	
 
 func add_fog_node(pos: Vector3):
-	pass
-	# var fog_instance = fog.instance()
-	# fog_instance.transform.origin = pos
-	# fog_nodes.append(fog_instance)
-	# add_child(fog_instance)
-
+	var fog_instance = fog.instance()
+	fog_instance.transform.origin = pos
+	fog_nodes.append(fog_instance)
+	add_child(fog_instance)
+	
+	
 func populate_map():
 	for _i in range(enemy_count):
 		var random_spawn_point = allowed_spawn_points.pop_at(rng.randi_range(0, allowed_spawn_points.size()-1))

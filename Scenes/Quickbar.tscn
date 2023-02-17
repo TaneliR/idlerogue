@@ -1,0 +1,119 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Quickbar.tres" type="StyleBox" id=1]
+[ext_resource path="res://Assets/quickbar.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/QuickbarSlot.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxTexture" id=31]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 768, 96 )
+
+[node name="Quickbar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 515.0
+margin_right = 1.0
+margin_bottom = -31.0
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.188
+anchor_top = 0.861
+anchor_right = 0.738
+anchor_bottom = 0.861
+margin_left = 0.291992
+margin_top = -31.295
+margin_right = -0.258057
+margin_bottom = 30.705
+custom_styles/panel = SubResource( 31 )
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+anchor_left = 0.014
+anchor_top = 0.077
+anchor_right = 0.986
+anchor_bottom = 1.0
+margin_right = -539.396
+margin_bottom = -55.738
+rect_min_size = Vector2( 512, 62 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/hseparation = 4
+columns = 10
+
+[node name="QuickbarSlot" type="Panel" parent="Panel/GridContainer"]
+margin_right = 52.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="QuickbarSlot2" type="Panel" parent="Panel/GridContainer"]
+margin_left = 56.0
+margin_right = 108.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="QuickbarSlot3" type="Panel" parent="Panel/GridContainer"]
+margin_left = 112.0
+margin_right = 164.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="QuickbarSlot4" type="Panel" parent="Panel/GridContainer"]
+margin_left = 168.0
+margin_right = 220.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="QuickbarSlot5" type="Panel" parent="Panel/GridContainer"]
+margin_left = 224.0
+margin_right = 276.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="QuickbarSlot6" type="Panel" parent="Panel/GridContainer"]
+margin_left = 280.0
+margin_right = 332.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="QuickbarSlot7" type="Panel" parent="Panel/GridContainer"]
+margin_left = 336.0
+margin_right = 388.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="QuickbarSlot8" type="Panel" parent="Panel/GridContainer"]
+margin_left = 392.0
+margin_right = 444.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="QuickbarSlot9" type="Panel" parent="Panel/GridContainer"]
+margin_left = 448.0
+margin_right = 500.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="QuickbarSlot10" type="Panel" parent="Panel/GridContainer"]
+margin_left = 504.0
+margin_right = 556.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )

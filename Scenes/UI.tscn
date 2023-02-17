@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/MoneyCounter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/UI.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/MoneyCounter.gd" type="Script" id=5]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource( 4 )
+
+[node name="Inventory" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="MoneyCounter" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 5 )

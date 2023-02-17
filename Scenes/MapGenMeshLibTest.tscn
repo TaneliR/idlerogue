@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://MeshInstances/FLOOR_box_shape.tres" type="Shape" id=1]
+[ext_resource path="res://MeshInstances/FLOOR_mesh.tres" type="CubeMesh" id=2]
+[ext_resource path="res://Assets/Downloaded/Models/OBJ format/tree_thin.obj" type="ArrayMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0.101961, 0.0470588, 0.0470588, 1 )
+
+[sub_resource type="CubeMesh" id=8]
+material = SubResource( 7 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=9]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="FLOOR" type="MeshInstance" parent="." groups=["pathable"]]
+mesh = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="FLOOR"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="FLOOR/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0 )
+shape = ExtResource( 1 )
+
+[node name="WALL" type="MeshInstance" parent="." groups=["wall"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.457782, 0 )
+mesh = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="WALL"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="WALL/StaticBody"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 9 )
+
+[node name="WALL2" type="MeshInstance" parent="." groups=["wall"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+mesh = ExtResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="WALL2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62402, 0 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="WALL2/StaticBody"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 9 )
