@@ -68,7 +68,7 @@ func _create_nav_cube(position: Vector3):
 func find_path(from: Vector3, to: Vector3) -> Array:
 	var start_id = astar.get_closest_point(from)
 	var end_id = astar.get_closest_point(to)
-	# DebugDraw.draw_arrow_path(astar.get_point_path(start_id, end_id), Color.gold, 0.5)
+	
 	return astar.get_point_path(start_id, end_id)
 
 func world_to_astar(world: Vector3) -> String:

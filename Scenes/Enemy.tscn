@@ -1,60 +1,14 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://Assets/ratte.png" type="Texture" id=1]
+[ext_resource path="res://Assets/EnemySpriteFrames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Healthbar3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Particles/muzzle_02.png" type="Texture" id=4]
+[ext_resource path="res://Assets/SFX/rat_walk.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Downloaded/Voxel Game Models - Starter Pack - Version 1.0/OBJ Files/Animals_Divided_OBJ/Penguin/Animals-6.obj" type="ArrayMesh" id=6]
 
 [sub_resource type="BoxShape" id=17]
 extents = Vector3( 0.5, 0.5, 0.5 )
-
-[sub_resource type="AtlasTexture" id=28]
-flags = 2
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=29]
-flags = 2
-atlas = ExtResource( 1 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=30]
-flags = 2
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=31]
-flags = 2
-atlas = ExtResource( 1 )
-region = Rect2( 48, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=32]
-flags = 2
-atlas = ExtResource( 1 )
-region = Rect2( 0, 16, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=33]
-flags = 2
-atlas = ExtResource( 1 )
-region = Rect2( 16, 16, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=34]
-flags = 2
-atlas = ExtResource( 1 )
-region = Rect2( 32, 16, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=35]
-flags = 2
-atlas = ExtResource( 1 )
-region = Rect2( 48, 16, 16, 16 )
-
-[sub_resource type="SpriteFrames" id=36]
-animations = [ {
-"frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
-"loop": true,
-"name": "default",
-"speed": 6.0
-} ]
 
 [sub_resource type="Curve" id=47]
 min_value = -72.0
@@ -122,6 +76,99 @@ albedo_texture = ExtResource( 4 )
 [sub_resource type="QuadMesh" id=52]
 material = SubResource( 51 )
 
+[sub_resource type="Animation" id=58]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite3D:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 4, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MeshInstance:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -6.4, 0, -0.32 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MeshInstance:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.7, 0.7, 0.7 ) ]
+}
+
+[sub_resource type="Animation" id=57]
+resource_name = "attack"
+loop = true
+tracks/0/type = "transform"
+tracks/0/path = NodePath("AnimatedSprite3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = PoolRealArray( 0, 1, 0, 0.5, 0, 0, 0, 0, 1, 5, 5, 5, 0.3, 1, 0.5, 1, 0, 0, 0, 15, 1, 5, 5, 5, 0.6, 1, 0.75, 0.5, 0, 0, 0, 0, 1, 5, 5, 5, 0.8, 1, 0, 0.5, 0, 0, 0, 0, 1, 5, 5, 5 )
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite3D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -25 ), Vector3( 0, 0, -5 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "transform"
+tracks/2/path = NodePath("MeshInstance")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = PoolRealArray( 0, 1, -6.4, 0, -0.32, 0, 0, 0, 1, 0.7, 0.7, 0.7, 0.1, 1, -6.4, 0.15, -0.32, 0, 0, 0, 1, 0.7, 0.7, 0.7, 0.2, 1, -5.8, 0, -0.32, 0, 0, 0, 1, 0.7, 0.7, 0.7, 0.6, 1, -6.4, 0, -0.32, 0, 0, 0, 1, 0.7, 0.7, 0.7 )
+tracks/3/type = "value"
+tracks/3/path = NodePath("MeshInstance:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 4, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
 [sub_resource type="Animation" id=54]
 resource_name = "hit"
 tracks/0/type = "value"
@@ -137,22 +184,71 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=59]
+resource_name = "move"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 4, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( -4, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -6.4, 0, -0.32 ), Vector3( -6.4, 0.05, -0.32 ), Vector3( -6.4, 0, -0.32 ), Vector3( -6.4, 0.05, -0.32 ), Vector3( -6.4, 0, -0.32 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MeshInstance:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.7, 0.7, 0.7 ), Vector3( 0.7, 0.68, 0.7 ), Vector3( 0.7, 0.7, 0.7 ), Vector3( 0.7, 0.71, 0.7 ), Vector3( 0.7, 0.7, 0.7 ) ]
+}
+
 [node name="Enemy" type="KinematicBody"]
 collision_layer = 3
 collision_mask = 3
+axis_lock_motion_y = true
+move_lock_y = true
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 shape = SubResource( 17 )
 
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -3.0598e-08, 0.0488295, 0.698295, 0, 0.698295, -0.0488295, -0.7, -2.13441e-09, -3.05234e-08, -0.347018, 0, 6.37973 )
+visible = false
+mesh = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.5, 0 )
 modulate = Color( 1, 0, 0, 1 )
 billboard = 1
-shaded = true
-frames = SubResource( 36 )
-frame = 5
+frames = ExtResource( 1 )
+frame = 1
 playing = true
 
 [node name="Blood" type="Particles" parent="."]
@@ -168,7 +264,21 @@ process_material = SubResource( 46 )
 draw_pass_1 = SubResource( 52 )
 
 [node name="Healthbar3D" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45068, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 58 )
+anims/attack = SubResource( 57 )
 anims/hit = SubResource( 54 )
+anims/move = SubResource( 59 )
+
+[node name="InfoAnchor" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5154, -0.0253621 )
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.369027, 0 )
+stream = ExtResource( 5 )
+unit_db = 14.0
+unit_size = 6.0
+pitch_scale = 1.35
+max_distance = 75.0

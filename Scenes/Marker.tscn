@@ -1,20 +1,27 @@
 [gd_scene load_steps=3 format=2]
 
 [sub_resource type="SpatialMaterial" id=12]
+flags_transparent = true
 flags_unshaded = true
-params_blend_mode = 2
-albedo_color = Color( 0, 1, 0.207843, 1 )
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
 
 [sub_resource type="CylinderMesh" id=13]
 material = SubResource( 12 )
-top_radius = 0.25
-bottom_radius = 0.25
+top_radius = 0.1
+bottom_radius = 0.01
 height = 4.0
-rings = 2
+radial_segments = 12
 
-[node name="Marker" type="MeshInstance"]
+[node name="Marker" type="Spatial"]
+
+[node name="Marker" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+visible = false
 mesh = SubResource( 13 )
 
 [node name="CameraAnchor" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.707106, 0.707106, 0, -0.707106, 0.707106, 0, 15, 15 )
+transform = Transform( 1, 0, 0, 0, 0.743144, 0.66913, 0, -0.66913, 0.743144, 0, 20, 20 )
+
+[node name="MinimapAnchor" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )

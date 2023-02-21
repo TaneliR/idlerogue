@@ -6,6 +6,7 @@ onready var noise = OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
 var player_instance
 var fog_nodes = []
+export (bool) onready var show_fog
 export (int) onready var enemy_count
 onready var allowed_spawn_points = []
 export (int) onready var map_size
@@ -42,10 +43,10 @@ func generate_new_map():
 			set_cell_item(x,0,z,tileType)
 	# Generate walls around the map
 	for i in range(map_size):
-		set_cell_item(-1, 0, i, TILE_TYPES.WALL)
-		set_cell_item(map_size, 0, i, TILE_TYPES.WALL)
-		set_cell_item(i, 0, -1, TILE_TYPES.WALL)
-		set_cell_item(i, 0, map_size , TILE_TYPES.WALL)
+		set_cell_item(-1, 0, i, 2, 10)
+		set_cell_item(map_size, 0, i, 2, 0)
+		set_cell_item(i, 0, -1, 2, 16)
+		set_cell_item(i, 0, map_size , 2, 22)
 	# Emit signals for AStar to start generating navigation,
 	# and for the MapGen camera to move according to the new map size
 	emit_signal("mapgen_finished", allowed_spawn_points)
@@ -54,6 +55,8 @@ func generate_new_map():
 	
 
 func add_fog_node(pos: Vector3):
+	if !show_fog:
+		return 
 	var fog_instance = fog.instance()
 	fog_instance.transform.origin = pos
 	fog_nodes.append(fog_instance)
@@ -94,11 +97,12 @@ func spawn_player():
 		player_instance.transform.origin = offset_from_origin + random_spawn_point
 		marker.transform.origin = random_spawn_point
 		add_child(player_instance)
+		
+	#$PlayerCamera.set_target(player_instance.get_node("CameraAnchor"))
 	$PlayerCamera.set_target(marker.get_node("CameraAnchor"))
 	$PlayerCamera.make_current()
 
 func _on_GenerateMap_button_down():
-	print("EYYYYY")
 	currentSeed = rng.randi()
 	generate_new_map()
 

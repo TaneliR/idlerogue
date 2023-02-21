@@ -9,7 +9,6 @@
 
 [node name="Fog" type="MeshInstance" parent="." groups=["pickable"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-cast_shadow = 0
 generate_lightmap = false
 mesh = ExtResource( 2 )
 script = ExtResource( 1 )

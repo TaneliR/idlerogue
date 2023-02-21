@@ -4,42 +4,42 @@
 [ext_resource path="res://Scripts/Coins.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 0, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 32, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 0, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 32, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 0, 96, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
-flags = 23
+flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 32, 96, 32, 32 )
 
@@ -63,7 +63,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.335443, 0 )
 pixel_size = 0.02
 billboard = 1
 frames = SubResource( 9 )
-frame = 14
+frame = 3
 playing = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

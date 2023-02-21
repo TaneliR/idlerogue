@@ -1,9 +1,31 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://Scripts/CombatLog.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/MoneyCounter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/UI.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/MoneyCounter.gd" type="Script" id=5]
+[ext_resource path="res://Assets/combat_log_dynamicfont.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Assets/combat_log_dynamicfont_code.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Assets/Cantarell/Cantarell-Bold.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0, 0, 0.913725, 0.251617, 0, 0.378906, 1 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+fill = 1
+fill_from = Vector2( 0.679167, 0.365625 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = SubResource( 2 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 18
+outline_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+font_data = ExtResource( 8 )
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource( 4 )
@@ -12,4 +34,37 @@ script = ExtResource( 4 )
 visible = false
 
 [node name="MoneyCounter" parent="." instance=ExtResource( 3 )]
+visible = false
 script = ExtResource( 5 )
+
+[node name="CombatLog" type="Node2D" parent="."]
+position = Vector2( 3, 1 )
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="CombatLog"]
+margin_left = 1360.0
+margin_top = 30.0
+margin_right = 1880.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 520, 320 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Background" type="ColorRect" parent="CombatLog/Panel"]
+margin_left = 8.0
+margin_top = 9.0
+margin_right = 512.0
+margin_bottom = 314.0
+color = Color( 0, 0, 0, 0.941176 )
+
+[node name="Log" type="RichTextLabel" parent="CombatLog/Panel/Background"]
+anchor_right = 1.004
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 6.0
+margin_right = -4.01596
+margin_bottom = -2.0
+custom_fonts/mono_font = ExtResource( 7 )
+custom_fonts/bold_font = SubResource( 4 )
+custom_fonts/normal_font = ExtResource( 6 )
+bbcode_enabled = true
+scroll_following = true

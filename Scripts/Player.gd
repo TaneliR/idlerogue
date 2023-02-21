@@ -18,12 +18,20 @@ var regen_tick
 var regen_amount = 5
 
 var rng = RandomNumberGenerator.new()
-var inputs = {"right": Vector3.RIGHT,
+var inputs = {
+			"right": Vector3.RIGHT,
 			"left": Vector3.LEFT,
 			"up": Vector3.FORWARD,
-			"down": Vector3.BACK}
+			"down": Vector3.BACK,
+			"upleft": Vector3.LEFT + Vector3.FORWARD,
+			"upright": Vector3.RIGHT + Vector3.FORWARD,
+			"downleft": Vector3.LEFT + Vector3.BACK,
+			"downright": Vector3.RIGHT + Vector3.BACK,
+			}
 var inventory = []
+onready var info_name = "Player"
 onready var money = 0
+onready var can_move = true
 signal money_changed
 signal set_camera_target
 signal update_health
@@ -45,83 +53,97 @@ func _ready():
 	
 
 # AStar
-func _physics_process(delta: float) -> void:
-	var new_velocity := Vector3.ZERO
-	var lerp_weight = delta * 12.0
-	if current_target != Vector3.INF:
-		var dir_to_target = global_transform.origin.direction_to(current_target).normalized()
-		look_at(transform.origin + global_transform.origin.direction_to(current_look_target).normalized(), Vector3.UP)
-
-		new_velocity = lerp(current_velocity, speed * dir_to_target, lerp_weight)
-		if global_transform.origin.distance_to(current_target) < 0.1:
-			find_next_point_in_path()
-	else:
-		new_velocity = lerp(current_velocity, Vector3.ZERO, lerp_weight)
-	current_velocity = move_and_slide(new_velocity)
 
 func find_next_point_in_path():
-	if path.size() > 0:
+	var action = { "target": self, "time": path.size() * speed}
+	while !path.empty():
 		var new_target = path.pop_front()
 		new_target.y = global_transform.origin.y
 		current_target = new_target
-		var action = { "target": self, "time": path.size() * speed}
-		TickManager.emit_signal("tick", action.time)
-	else:
-		current_target = Vector3.INF
+		
+		print("Minä:", global_transform.origin)
+		print("Path:", path)
+		print("Pathpoint:", new_target)
+		
+		yield(get_tree().create_timer(0.5), "timeout")
+		var dir = global_transform.origin.direction_to(new_target).normalized()
+		print("Direction:", dir)
+		var nextStep = Vector3(stepify(dir.x, tile_size), 0, stepify(dir.z, tile_size))
+		print("what?")
+		look_at(dir, Vector3.UP)
+		var col = move_and_collide(nextStep);
+#			move(new_target)
+	can_move = false;
+	TickManager.emit_signal("tick", action.time, self)	
+		
+#	else:
+#		current_target = Vector3.INF
+
+func tick_completed():
+	can_move = true;
 
 func update_path(new_path: Array):
 	path = new_path
+	path.remove(0)
 	find_next_point_in_path()
 	
 func act():
 	print("E")
 
-# func _unhandled_input(event):
-# 	for dir in inputs.keys():
-# 		if event.is_action_pressed(dir) && !moving:
-# 			move(dir)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
+		if !can_move:
+			print("Can't move yet!")
+			return
 		var e: InputEventMouseButton = event
-		var camera = get_parent().get_node("PlayerCamera")
-		var from = camera.project_ray_origin(e.position)
-		var to = camera.project_ray_normal(e.position) * 1000
-
-		var space_state = get_world().direct_space_state
-		var result = space_state.intersect_ray(from, to, [self], 5)
+		var result = _raycast_from_camera_to_ground(e)
 		if result != null and not result.empty():
-			var stepified = Vector3(stepify(result.position.x + .5, .5), result.position.y ,stepify(result.position.z, .5))
+			var stepified = Vector3(stepify(result.position.x, 1), 0 ,stepify(result.position.z, 1))
 			var closest_astar_id = nav.astar.get_closest_point(stepified)
 			var closest_center = nav.astar.get_point_position(closest_astar_id)
-			
-			print("ID", closest_astar_id)
-			print("Real Point", result.position)
-			print("Stepified point", stepified)
-			print("Closest center", closest_center)
 			current_look_target = closest_center
-			if event.is_action_pressed("click") and result.collider.is_in_group("pathable"):
-				update_path(nav.find_path(transform.origin, closest_center))
-				marker.global_transform.origin = closest_center
+			if event.is_action_pressed("click"):
+				if result.collider.is_in_group("pathable"):
+					update_path(nav.find_path(transform.origin, closest_center))
+					marker.global_transform.origin = closest_center
+				elif result.collider.is_in_group("enemy"):
+					var info = result.collider.get_info()
+					InfoEventManager.emit_signal("show_infobox", info)
 			elif event.is_action_pressed("right_click"):
 				var new_spell = spell.instance()
 				var spawn_point = transform.origin + Vector3(0,.5,0)
 				new_spell.transform.origin = spawn_point
 				var shoot_direction = spawn_point.direction_to(closest_center).normalized()
-				print(shoot_direction)
-				print(closest_center)
 				get_parent().add_child(new_spell)
-				new_spell.shoot(Vector3(shoot_direction.x, 0, shoot_direction.z))
+				new_spell.shoot(Vector3(shoot_direction.x, 0, shoot_direction.z), self)
+				var action = { "target": self, "time": 1}
+				TickManager.emit_signal("tick", action.time, self)
+				
+func _input(event):
+	var action = null
+	for _action in InputMap.get_actions():
+		if InputMap.event_is_action(event, _action):
+			action = _action
+	if (inputs.has(action) and Input.is_action_just_pressed(action)):
+		move(inputs[action])
+
+
+func _raycast_from_camera_to_ground(event):
+	var camera = get_parent().get_node("PlayerCamera")
+	var from = camera.project_ray_origin(event.position);
+	var to = from + camera.project_ray_normal(event.position) * 1000;
+	var space_state = get_world().get_direct_space_state()
+	return space_state.intersect_ray( from, to, [self], 5)
 
 # /AStar
 
 func move(dir):
 	health_regen()
-	var nextStep = inputs[dir] * tile_size;
-	var col = move_and_collide(nextStep, true, true, true);
+	var next_step = dir * tile_size;
+	rotation.y = lerp_angle(rotation.y, atan2(dir.x, dir.z), 1);
+	var col = move_and_collide(next_step);
 	if (col && col.collider.is_in_group("enemy")):
 		attack(col.collider)
-	else:
-		var _col = move_and_collide(nextStep);
 	if $PickupZone.items_in_range.size() > 0:
 		var pickup_item = $PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
@@ -133,7 +155,9 @@ func move(dir):
 					
 func attack(target):
 	var dmg = hit_die[0] * hit_die[1] + attack_power;
-	target.take_damage(dmg);
+	var attack_string = "hit [color=red]%s[/color] for [shake rate=1 level=10][color=red]%s[/color][/shake] [code][color=gray](%sd%s+%s)[/color][/code] damage." % [target.info_name, dmg, hit_die[0], hit_die[1], attack_power]
+	TickManager.send_log_entry("[color=green]Player[/color]", attack_string)
+	target.take_damage(dmg);7
 
 func take_damage(dmg):
 	health -= dmg

@@ -11,7 +11,8 @@ func _input(event):
 		
 		if result && (result.collider.is_in_group("pathable") or result.collider.is_in_group("enemy")):
 			clear_old_path()
-			var result_position = nav.astar.get_point_position(nav.astar.get_closest_point(Vector3(result.position.x, 0 ,result.position.z)));
+			var stepified = Vector3(stepify(result.position.x, 1), 0 ,stepify(result.position.z, 1))
+			var result_position = nav.astar.get_point_position(nav.astar.get_closest_point(stepified));
 			global_transform.origin = result_position
 			var path_to_player = nav.find_path(result_position, get_parent().get_node("Player").transform.origin)
 			generate_path(path_to_player, result.collider.is_in_group("enemy"))

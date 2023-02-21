@@ -1,11 +1,14 @@
 [gd_resource type="CubeMesh" load_steps=2 format=2]
 
 [sub_resource type="SpatialMaterial" id=1]
+flags_vertex_lighting = true
+flags_no_depth_test = true
 flags_do_not_receive_shadows = true
-params_diffuse_mode = 1
-params_specular_mode = 4
-params_depth_draw_mode = 1
-albedo_color = Color( 0, 0, 0, 0.964706 )
+vertex_color_use_as_albedo = true
+params_blend_mode = 2
+params_cull_mode = 2
+albedo_color = Color( 0.105882, 0.105882, 0.105882, 1 )
+metallic_specular = 0.0
 
 [resource]
 material = SubResource( 1 )
